@@ -10,9 +10,17 @@ E-Coordinator requires PHP, Python, Apache, Bootstrap, jQuery and more stuff soo
 
 ### Installing
 
-Coming soon...
+#### Windows
 
-
+1. Install [WAMP Server](http://www.wampserver.com/en/#download-wrapper)
+2. Run WAMP Manager
+3. Git checkout the eCoordinator repository into the C:\wamp64\www directory
+4. Visit http://localhost/phpmyadmin/server_databases.php
+6. Select Import from the top navigation bar.
+7. Select the dbSQLdump.sql file from C:\wamp64\www\ecoordinator\
+8. Click "Go" button
+9. Visit localhost/ecoordinator
+ 
 ## Running the tests
 
 Coming soon...
