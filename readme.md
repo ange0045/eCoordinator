@@ -20,6 +20,17 @@ E-Coordinator requires PHP, Python, Apache, Bootstrap, jQuery and more stuff soo
 7. Select the dbSQLdump.sql file from C:\wamp64\www\ecoordinator\
 8. Click "Go" button
 9. Visit localhost/ecoordinator
+
+##### Turn off PHP Notice Errors
+
+1. Edit the file C:\wamp64\bin\php\php5.6.31\phpForApache.ini
+2. Change line 449 from `error_reporting = E_ALL` to `error_reporting = E_ALL & ~E_NOTICE`
+
+#### Adding a New User
+
+1. Follow the sign up procedure at http://localhost/eCoordinator/f_newuser.php
+2. Visit the users table in [phpMyAdmin](http://localhost/phpmyadmin/sql.php?db=ecoordinator&goto=db_structure.php&table=users&pos=0)
+3. Edit the new user added above to change the user_approval column from `N` to `Y`
  
 ## Running the tests
 
