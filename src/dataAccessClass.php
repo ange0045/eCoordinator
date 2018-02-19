@@ -2,9 +2,9 @@
 /*---------------------------------------------------------------------------------------------------/
            NAME: dataAccessClass.php
     DESCRIPTION: Library used for all queries and connections.
-                 Only requires EntityClass_Lib.
+                 Only requires entityClass.php.
  ----------------------------------------------------------------------------------------------------*/
-include_once 'EntityClass_Lib.php';
+include_once 'entityClass.php';
 
 class DataAccessObject
 {
