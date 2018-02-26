@@ -41,45 +41,33 @@ class Course
 {
     private $course_key;
     private $course_pass_grade;
-    private $course_dependent;
-    private $course_dependency;
     private $course_level;
-    private $course_comments;
+    private $course_name;
     
-    public function __construct($course_key, $course_pass_grade, $course_dependent, $course_dependency, $course_level, $course_comments) {
+    public function __construct($course_key, $course_name, $course_pass_grade, $course_level) {
         $this->course_key = $course_key;
         $this->course_pass_grade = $course_pass_grade;
-        $this->course_dependent = $course_dependent;
-        $this->course_dependency = $course_dependency;
         $this->course_level = $course_level;
-        $this->course_comments = $course_comments;
+        $this->course_name = $course_name;
     }
     
     public function __toString(){
         return $this->course_key;
     }
     
-    public function getCourseKey(){
+    public function getKey(){
         return $this->course_key;
     }
     
-    public function getCoursePassGrade(){
+    public function getPassGrade(){
         return $this->course_pass_grade;
     }
     
-    public function getCourseDependent(){
-        return $this->course_dependent;
-    }
-    
-    public function getCourseDependency(){
-        return $this->course_dependency;
-    }
-    
-    public function getCourseLevel(){
+    public function getLevel(){
         return $this->course_level;
     }
     
-    public function getCourseComments(){
+    public function getName(){
         return $this->course_comments;
     }
 }

@@ -25,7 +25,7 @@ if(isset($btnSubmit)){
                 <option value="0">--Select Course--</option>
                 <?php 
                     foreach($courses as $course){
-                        echo "<option value='{$course->getCourseKey()}'>{$course->getCourseKey()}</option>";
+                        echo "<option value='{$course->getKey()}'>$course</option>";
                     }
                 ?>
             </select>
