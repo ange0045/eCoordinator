@@ -92,6 +92,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background: #f9f9f9 url(http://www.algonquincollege.com/sat/wp-content/themes/algonquincollege2013/images/backgr.jpg) fixed no-repeat center top;
+        background-color: #f9f9f9;
 }
 body.rtl {
 	text-align: right;
