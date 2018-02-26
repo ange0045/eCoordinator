@@ -1,3 +1,6 @@
+</div>
+</div>
+</body>
 <footer style="min-height: 200px">
 	<div class="inside">
 		<section id="schools"  style="margin-left: 20px">
@@ -11,9 +14,8 @@
 		</section>
 
 	  <section id="schools"  class="float-right">
-	    <img src="src/img/tortkinglogo.png" style="height: 12rem" alt="Tortilla King"/>
+	    <img src="src/img/tortkinglogoFooter.png" style="height: 12rem" alt="Tortilla King"/>
 	  </section>
 	</div>
 </footer>
-</body>
 </html>

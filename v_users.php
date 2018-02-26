@@ -20,13 +20,13 @@ if(isset($btnAppUser) & isset($chk_UsrSel)){
     }
 }
 ?>
-  <div class="row col-sm-offset-1 col-sm-10">
-        <div class='col-sm-2 btnsAdmin'>
+  <div class="row col-sm-offset-1 col-sm-12">
+        <div class='col-sm-3 btnsAdmin'>
             <button id='btnAppUser' value='btnAppUser' name='btnAppUser' class='btn label label-primary btnAction btnApprove'>Approve Selected</button>
             <button value='Delete' name='btnDelete' data-toggle='modal' data-target='#modalDelete' data-id='Delete' id='btnDelete' class='btn label label-primary btnAction'>Delete Selected</button>
         </div>
 
-        <div class='col-sm-10'>
+        <div class='col-sm-9'>
 
             <table class='table table-striped table-hover'>
                 <thead class='thead'>

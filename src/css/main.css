@@ -49,7 +49,7 @@
 }
 
 #btnLogout {
-  color: yellow;
+  color: #8ebc5c;
   text-decoration: underline;
   margin      : 0;
   padding     : 0;
@@ -178,4 +178,7 @@
 .xsCell {
     width: 2%;
 }
+
 /* .VIEWS */
+
+

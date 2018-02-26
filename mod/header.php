@@ -19,7 +19,7 @@ if(!isset($_SESSION['ses_Name']) && ($_SERVER['PHP_SELF'] != '/eCoordinator/f_lo
         <title>Algonquin College eCoordinator</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link href='src/img/tortkinglogo.ico' type='image/x-icon' rel='icon'/>
-        <link href='http://www3.algonquincollege.com/sat/wp-content/themes/algonquincollege2013/style.css' rel='stylesheet'/>
+        <link href='src/css/style.css' rel='stylesheet'/>
         <link href='src/css/bootstrap.min.css' rel='stylesheet'/>
         <link href='src/css/main.css' rel='stylesheet'/>
         <link href='src/css/font-awesome.min.css' rel='stylesheet' >
@@ -29,7 +29,7 @@ if(!isset($_SESSION['ses_Name']) && ($_SERVER['PHP_SELF'] != '/eCoordinator/f_lo
      </head>
 
      <header>
-       <a href='http://www.algonquincollege.com'><img src='src/img/aclogo.png' style='height:4rem;' alt='Algonquin College' id='logo'/></a>
+       <a href='http://www.algonquincollege.com'><img src='src/img/aclogoheader.png' style='height:4rem;' alt='Algonquin College' id='logo'/></a>
        <nav>
          <div class="menu-local-nav-container">
             <ul id="menu-local-nav" class="menu">
@@ -55,7 +55,9 @@ if(!isset($_SESSION['ses_Name']) && ($_SERVER['PHP_SELF'] != '/eCoordinator/f_lo
 
 
     <body>
-       <div class="contentMain">
+        <div id="wrapper">
+       <div id="main" role="main">
+           
 
 <?php // ************************** MESSAGE CONFIRMATION ************************** ?>
           <div id="message">
