@@ -5,8 +5,7 @@ extract($_POST);
 
 
 if(isset($btnSubmit)){
-    $result = "";
-   
+    unset($_SESSION['result']);
     
     //Output result message
     if ($error == false) {

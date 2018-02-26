@@ -106,4 +106,33 @@ public function getUserByUsernameAndPassword($username, $password)
 }
 // .USER ENDS
 
+// ++++++++ COURSE FUNCTIONS ++++++++
+
+// Ger Courses
+public function getCourses()
+{
+    $courses = array();
+    $sql = "SELECT * FROM course ORDER BY course_key ASC";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    foreach ($stmt as $row)
+    {
+        $course = new Course ($row['course_key'], $row['course_pass_grade'], $row['course_dependent'], $row['course_dependency'], $row['course_level'], $row['course_comments']);
+        $courses[] = $course;
+    }
+    return $courses;
+}
+
+public function getCourseByKey($courseKey)
+{
+    $sql = "SELECT * FROM course WHERE course_key = $courseKey";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    $row = $stmt->fetch();
+    $course = new Course ($row['course_key'], $row['course_pass_grade'], $row['course_dependent'], $row['course_dependency'], $row['course_level'], $row['course_comments']);
+    
+    return $course;
+}
+
+
 }
