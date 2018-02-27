@@ -142,15 +142,15 @@ public function saveCourse($key, $level){
 }
 
 
-public function saveNewCourse($fldCourseName, $fldCourseKey, $fldCourseLevel, $fldPassingGrade, $dependancies){
-    $sql = "INSERT INTO course VALUES(:fCourseKey, fPassingGrade, :fCourseLevel, :fCourseName)";
+public function saveNewCourse($fldCourseName, $fldCourseKey, $fldCourseLevel, $fldPassingGrade, $dependencies){
+    $sql = "INSERT INTO course VALUES(:fCourseKey, :fPassingGrade, :fCourseLevel, :fCourseName)";
     $stmt = $this->pdo->prepare($sql);
     $this->pdo->beginTransaction();
-    $stmt->execute(['fCourseKey'=>$fldCourseKey,'fPassingGrade'=>$fldPassingGrade, 'dCourseLevel'=>$fldCourseLevel, 'fCourseName'=>$fldCourseName]);
+    $stmt->execute(['fCourseKey'=>$fldCourseKey,'fPassingGrade'=>$fldPassingGrade, 'fCourseLevel'=>$fldCourseLevel, 'fCourseName'=>$fldCourseName]);
     $this->pdo->commit();
     
-    if(!empty($dependancies)){
-        foreach($dependancies as $dependancy){
+    if(!empty($dependencies)){
+        foreach($dependencies as $dependancy){
             $sql = "INSERT INTO dependencies VALUES(:fCourseKey, :fDependancy)";
             $stmt = $this->pdo->prepare($sql);
             $this->pdo->beginTransaction();
