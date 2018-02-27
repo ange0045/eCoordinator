@@ -68,6 +68,6 @@ class Course
     }
     
     public function getName(){
-        return $this->course_comments;
+        return $this->course_name;
     }
 }
