@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `student` (
 
 DROP TABLE IF EXISTS `studentcourse`;
 CREATE TABLE IF NOT EXISTS `studentcourse` (
-  `student_id` varchar(5) NOT NULL,
+  `student_id` varchar(30) NOT NULL,
   `course_key` varchar(30) NOT NULL,
   `student_grade` varchar(5) NOT NULL,
   `comments` varchar(280) DEFAULT NULL,
