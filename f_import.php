@@ -3,11 +3,20 @@ include 'mod/header.php';
 session_start();
 extract($_POST);
 
+//+++++Note++++
+//Import doesn't handle csv comments since that is now moving to the Student layout page
 
+//TODO Limit file type to csv only
+//TODO Catch/handle errors
+//TODO Overwrite new grade for an existing students grade
+
+
+//Reads the uploaded csv file and parses the headers and row data creating a key/value relationship. Then saves that data into the database.
 function importUploadedFile() {
     $dao = new DataAccessObject(INI_FILE_PATH);
     $uploadFile = fopen($_FILES["fileUpload"]["tmp_name"], "r") or die("Unable to open file!");
     $headers = parseHeader($uploadFile);
+    //While not the end of the file
     while(!feof($uploadFile)) {
         $row = parseRow($headers, $uploadFile);
         if(empty($row)){ break; }
@@ -16,26 +25,30 @@ function importUploadedFile() {
     fclose($uploadFile);
 }
 
+//Skips the first line of the csv and then saves a list of courses and a list of headers. 
 function parseHeader($file) {
-    fgets($file);
-    $courses = fgetcsv($file);
-    $headers = fgetcsv($file);
-    $courses[0] = $headers[0];
-    $courses[1] = trim($headers[1]);
-    $courses[2] = $headers[2];
-    return $courses;
+    fgets($file); // Ignore initial line that contains garbage
+    $firstHeaders = fgetcsv($file);
+    $secondHeaders = fgetcsv($file);
+    $firstHeaders[0] = $secondHeaders[0]; // Student #
+    $firstHeaders[1] = trim($secondHeaders[1]); // Student Name
+    $firstHeaders[2] = $secondHeaders[2]; // Level
+    return $firstHeaders;
 }
 
+//Gets a row of data from the csv file and uses the header information as a key to the row values
 function parseRow($headers, $file) {
     $data = fgetcsv($file);
     $row = array_combine($headers, $data);
     return array_filter($row);
 }
 
+//Matches only the coursekey format
 function isCourse($str){
     return preg_match('/^\w{3}\d{4}/', $str) === 1;
 }
 
+//Takes the data from one row of the csv and saves it in the Student, Course, and StudentCourse table.
 function saveRow($dao, $row){
     $dao->saveStudent($row["Student #"], $row["Student Name"]);
     $courses = array_filter($row, "isCourse", ARRAY_FILTER_USE_KEY);
