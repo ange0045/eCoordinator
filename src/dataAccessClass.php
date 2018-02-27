@@ -108,7 +108,6 @@ public function getUserByUsernameAndPassword($username, $password)
 
 // ++++++++ COURSE FUNCTIONS ++++++++
 
-// Ger Courses
 public function getCourses()
 {
     $courses = array();
@@ -134,5 +133,32 @@ public function getCourseByKey($courseKey)
     return $course;
 }
 
-
+public function saveCourse($key, $level){
+    $sql = "INSERT INTO course VALUES(:fCourseKey, DEFAULT, :fLevel, NULL)";
+    $stmt = $this->pdo->prepare($sql);
+    $this->pdo->beginTransaction();
+    $stmt->execute(['fCourseKey'=>$key, 'fLevel'=>$level]);
+    $this->pdo->commit();
 }
+
+// ++++++++ STUDENTCOURSE FUNCTIONS ++++++++
+
+public function saveStudentCourse($student_id, $course_key, $grade){
+    $sql = "INSERT INTO studentcourse VALUES(:fStudentID, :fCourseKey, :fGrade, NULL)";
+    $stmt = $this->pdo->prepare($sql);
+    $this->pdo->beginTransaction();
+    $stmt->execute(['fStudentID'=>$student_id, 'fCourseKey'=>$course_key, 'fGrade'=>$grade]);
+    $this->pdo->commit();
+}
+
+// ++++++++ STUDENT FUNCTIONS ++++++++
+
+public function saveStudent($student_id, $name){
+    $sql = "INSERT INTO student VALUES(:fStudentID, :fName, DEFAULT, DEFAULT, NULL)";
+    $stmt = $this->pdo->prepare($sql);
+    $this->pdo->beginTransaction();
+    $stmt->execute(['fStudentID'=>$student_id, 'fName'=>$name]);
+    $this->pdo->commit();
+}
+}
+

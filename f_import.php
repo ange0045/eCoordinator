@@ -4,8 +4,51 @@ session_start();
 extract($_POST);
 
 
+function importUploadedFile() {
+    $dao = new DataAccessObject(INI_FILE_PATH);
+    $uploadFile = fopen($_FILES["fileUpload"]["tmp_name"], "r") or die("Unable to open file!");
+    $headers = parseHeader($uploadFile);
+    while(!feof($uploadFile)) {
+        $row = parseRow($headers, $uploadFile);
+        if(empty($row)){ break; }
+        saveRow($dao, $row);
+      }
+    fclose($uploadFile);
+}
+
+function parseHeader($file) {
+    fgets($file);
+    $courses = fgetcsv($file);
+    $headers = fgetcsv($file);
+    $courses[0] = $headers[0];
+    $courses[1] = trim($headers[1]);
+    $courses[2] = $headers[2];
+    return $courses;
+}
+
+function parseRow($headers, $file) {
+    $data = fgetcsv($file);
+    $row = array_combine($headers, $data);
+    return array_filter($row);
+}
+
+function isCourse($str){
+    return preg_match('/^\w{3}\d{4}/', $str) === 1;
+}
+
+function saveRow($dao, $row){
+    $dao->saveStudent($row["Student #"], $row["Student Name"]);
+    $courses = array_filter($row, "isCourse", ARRAY_FILTER_USE_KEY);
+    foreach ($courses as $key => $grade) {
+        $dao->saveCourse($key, $row["Level"]);
+        $dao->saveStudentCourse($row["Student #"], $key, $grade);
+    }
+}
+
 if(isset($btnSubmit)){
     unset($_SESSION['result']);
+    
+    importUploadedFile();
     
     //Output result message
     if ($error == false) {
@@ -22,7 +65,7 @@ if(isset($btnSubmit)){
     </div>
     <div class="form-group">
         <div class="offset-sm-4 col-sm-6 pb-4">
-            <input type="file"> 
+            <input type="file" name="fileUpload"> 
         </div>
         <div class="offset-sm-6 col sm-4 pb-2">
             <input type="submit" name="btnSubmit" text="Import"></input>
