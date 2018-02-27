@@ -141,6 +141,25 @@ public function saveCourse($key, $level){
     $this->pdo->commit();
 }
 
+
+public function saveNewCourse($fldCourseName, $fldCourseKey, $fldCourseLevel, $fldPassingGrade, $dependancies){
+    $sql = "INSERT INTO course VALUES(:fCourseKey, fPassingGrade, :fCourseLevel, :fCourseName)";
+    $stmt = $this->pdo->prepare($sql);
+    $this->pdo->beginTransaction();
+    $stmt->execute(['fCourseKey'=>$fldCourseKey,'fPassingGrade'=>$fldPassingGrade, 'dCourseLevel'=>$fldCourseLevel, 'fCourseName'=>$fldCourseName]);
+    $this->pdo->commit();
+    
+    if(!empty($dependancies)){
+        foreach($dependancies as $dependancy){
+            $sql = "INSERT INTO dependencies VALUES(:fCourseKey, :fDependancy)";
+            $stmt = $this->pdo->prepare($sql);
+            $this->pdo->beginTransaction();
+            $stmt->execute(['fCourseKey'=>$fldCourseKey,'fDependancy'=>$dependancy]);
+            $this->pdo->commit();
+        }
+    }
+}
+
 // ++++++++ STUDENTCOURSE FUNCTIONS ++++++++
 
 public function saveStudentCourse($student_id, $course_key, $grade){

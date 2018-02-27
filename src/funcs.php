@@ -137,3 +137,38 @@ echo "<div class='col-sm-4 vcenter'>";
     echo "<span class='cc_error_msg'>$sVal</span>";
 echo "</div>";
 }//.func_fieldErrBuilder END
+
+
+/*--------------------------------------------------------------/
+ *              VALIDATION NEW COURSE FUNCTION
+ *--------------------------------------------------------------*/
+// Checks if any of your fields are empty and generates error messages
+
+function val_newCourse($f_title, $f_name) {
+        $field  = $_POST[$f_name];
+        if(empty($field)) { // Main validation to check if empty
+            $errVal = "$f_title cannot be left empty";
+            $_SESSION['errCheck'] = "err";
+        }
+        elseif($f_name == 'fldCourseKey') {  // Course Code Validation (3 letters, 4 numbers)
+            $code = preg_match('/^\w{3}\d{4}/', $field);
+
+            if(!$code) {
+                $errVal = "Course code must contain 3 letters followed by 4 numbers.";
+                $_SESSION['errCheck'] = "err";
+            }
+        }
+        elseif ($f_name == 'fldCourseLevel') {
+            $level = preg_match('/\b[1-4]\b/', $field);
+            
+            if(!$level) {
+                $errVal = "Course level must be between 1 and 4.";
+                $_SESSION['errCheck'] = "err";
+            }  
+        }
+        else {
+            $errVal = ""; // If no errors found clears err variable
+        }
+        $_SESSION['ses_'.$f_name] = $field; // Creates a new ses var to store value of field
+        return $errVal;
+}
