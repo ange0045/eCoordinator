@@ -117,7 +117,7 @@ public function getCourses()
     $stmt->execute();
     foreach ($stmt as $row)
     {
-        $course = new Course ($row['course_key'], $row['course_pass_grade'], $row['course_dependent'], $row['course_dependency'], $row['course_level'], $row['course_comments']);
+        $course = new Course ($row['course_key'], $row['course_name'], $row['course_pass_grade'], $row['course_level']);
         $courses[] = $course;
     }
     return $courses;
@@ -129,7 +129,7 @@ public function getCourseByKey($courseKey)
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     $row = $stmt->fetch();
-    $course = new Course ($row['course_key'], $row['course_pass_grade'], $row['course_dependent'], $row['course_dependency'], $row['course_level'], $row['course_comments']);
+    $course = new Course ($row['course_key'], $row['course_name'], $row['course_pass_grade'], $row['course_level']);
     
     return $course;
 }
