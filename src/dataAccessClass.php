@@ -108,6 +108,20 @@ public function getUserByUsernameAndPassword($username, $password)
 
 // ++++++++ COURSE FUNCTIONS ++++++++
 
+public function getDependencies($courseKey)
+{
+    $dependencies = [];
+    $sql = "SELECT depends_on FROM dependencies WHERE course_key = :courseKey";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(["courseKey" => $courseKey]);
+    foreach ($stmt as $row)
+    {
+        $dependencies[] = $row['depends_on'];
+    }
+    
+    return $dependencies;
+}
+
 public function getCourses()
 {
     $courses = array();
@@ -116,7 +130,8 @@ public function getCourses()
     $stmt->execute();
     foreach ($stmt as $row)
     {
-        $course = new Course ($row['course_key'], $row['course_name'], $row['course_pass_grade'], $row['course_level']);
+        $dependencies = $this->getDependencies($row['course_key']);
+        $course = new Course ($row['course_key'], $row['course_name'], $row['course_pass_grade'], $row['course_level'], $dependencies);
         $courses[] = $course;
     }
     return $courses;
@@ -124,12 +139,14 @@ public function getCourses()
 
 public function getCourseByKey($courseKey)
 {
-    $sql = "SELECT * FROM course WHERE course_key = $courseKey";
+    $sql = "SELECT * FROM course WHERE course_key = :courseKey";
     $stmt = $this->pdo->prepare($sql);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    $course = new Course ($row['course_key'], $row['course_name'], $row['course_pass_grade'], $row['course_level']);
-    
+    $stmt->execute(["courseKey" => $courseKey]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if($row){
+        $dependencies = $this->getDependencies($courseKey);
+        $course = new Course ($row['course_key'], $row['course_name'], $row['course_pass_grade'], $row['course_level'], $dependencies);
+    }
     return $course;
 }
 
@@ -147,6 +164,30 @@ public function saveNewCourse($fldCourseName, $fldCourseKey, $fldCourseLevel, $f
     $stmt = $this->pdo->prepare($sql);
     $this->pdo->beginTransaction();
     $stmt->execute(['fCourseKey'=>$fldCourseKey,'fPassingGrade'=>$fldPassingGrade, 'fCourseLevel'=>$fldCourseLevel, 'fCourseName'=>$fldCourseName]);
+    $this->pdo->commit();
+    
+    if(!empty($dependencies)){
+        foreach($dependencies as $dependancy){
+            $sql = "INSERT INTO dependencies VALUES(:fCourseKey, :fDependancy)";
+            $stmt = $this->pdo->prepare($sql);
+            $this->pdo->beginTransaction();
+            $stmt->execute(['fCourseKey'=>$fldCourseKey,'fDependancy'=>$dependancy]);
+            $this->pdo->commit();
+        }
+    }
+}
+
+public function updateCourse($editCourseKey, $fldCourseName, $fldCourseKey, $fldCourseLevel, $fldPassingGrade, $dependencies){
+    $sql = "UPDATE course SET course_key = :fCourseKey, course_pass_grade = :fPassingGrade, course_level = :fCourseLevel, course_name = :fCourseName WHERE course_key = :editCourseKey";
+    $stmt = $this->pdo->prepare($sql);
+    $this->pdo->beginTransaction();
+    $stmt->execute(['editCourseKey'=>$editCourseKey, 'fCourseKey'=>$fldCourseKey,'fPassingGrade'=>$fldPassingGrade, 'fCourseLevel'=>$fldCourseLevel, 'fCourseName'=>$fldCourseName]);
+    $this->pdo->commit();
+    
+    $sql = "DELETE FROM dependencies WHERE course_key = :editCourseKey";
+    $stmt = $this->pdo->prepare($sql);
+    $this->pdo->beginTransaction();
+    $stmt->execute(['editCourseKey'=>$editCourseKey]);
     $this->pdo->commit();
     
     if(!empty($dependencies)){
@@ -179,5 +220,6 @@ public function saveStudent($student_id, $name){
     $stmt->execute(['fStudentID'=>$student_id, 'fName'=>$name]);
     $this->pdo->commit();
 }
+
 }
 

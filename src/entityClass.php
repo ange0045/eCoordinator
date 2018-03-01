@@ -44,11 +44,12 @@ class Course
     private $course_level;
     private $course_name;
     
-    public function __construct($course_key, $course_name, $course_pass_grade, $course_level) {
+    public function __construct($course_key, $course_name, $course_pass_grade, $course_level, $dependencies) {
         $this->course_key = $course_key;
         $this->course_pass_grade = $course_pass_grade;
         $this->course_level = $course_level;
         $this->course_name = $course_name;
+        $this->dependencies = $dependencies;
     }
     
     public function __toString(){
@@ -69,5 +70,9 @@ class Course
     
     public function getName(){
         return $this->course_name;
+    }
+    
+    public function getDependencies(){
+        return $this->dependencies;
     }
 }

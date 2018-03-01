@@ -159,7 +159,7 @@ function val_newCourse($f_title, $f_name) {
             }
         }
         elseif ($f_name == 'fldCourseLevel') {
-            $level = preg_match('/\b[1-4]\b/', $field);
+            $level = preg_match('/^[1-4]$/', $field);
             
             if(!$level) {
                 $errVal = "Course level must be between 1 and 4.";
