@@ -225,12 +225,12 @@ public function saveStudent($student_id, $name){
 public function getStudents ($fldStudentName){
     $sqlStudentName = "%".$fldStudentName ."%";
     $students = array();
-    $sql = "SELECT student_id, student_first_name, student_last_name FROM student WHERE student_first_name LIKE :name";
+    $sql = "SELECT student_id, student_name, student_email FROM student WHERE student_name LIKE :name";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute(["name" => $sqlStudentName]);
     foreach ($stmt as $row)
     {
-        $student = new Student ($row['student_id'], $row['student_first_name'], $row['student_last_name']);
+        $student = new Student ($row['student_id'], $row['student_name'], $row['student_email']);
         $students[] = $student;
     }
     return $students;
