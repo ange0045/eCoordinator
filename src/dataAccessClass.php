@@ -222,12 +222,12 @@ public function saveStudent($student_id, $name){
 }
 
 // ++++++++  GET STUDENT FUNCTIONS ++++++++
-public function getStudents (){
+public function getStudents ($fldStudentName){
+    $sqlStudentName = "%".$fldStudentName ."%";
     $students = array();
-    $sql = "SELECT * FROM student WHERE student_first_name LIKE ?";
-    $params = array('%$fldStudentName%');
+    $sql = "SELECT student_id, student_first_name, student_last_name FROM student WHERE student_first_name LIKE :name";
     $stmt = $this->pdo->prepare($sql);
-    $stmt->execute($params);
+    $stmt->execute(["name" => $sqlStudentName]);
     foreach ($stmt as $row)
     {
         $student = new Student ($row['student_id'], $row['student_first_name'], $row['student_last_name']);

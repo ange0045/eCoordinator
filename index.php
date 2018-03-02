@@ -33,14 +33,13 @@ if(isset($btnSearch)){
                         echo "<table class='table table-striped table-hover'>"; // Creates table for Students
                         echo "<thead class='thead'>";
                         echo "<tr>";
-                        echo "<th class='centerLabel xsCell'></th>";
                         echo "<th class='centerLabel lgCell'>ID</th>";
                         echo "<th class='centerLabel lgCell'>First Name</th>";
                         echo "<th class='centerLabel lgCell'>Last Name</th>";
                         echo "</tr>";
                         echo "</thead>";
                         echo "<tbody>";
-                        $students = $dao->getStudents();
+                        $students = $dao->getStudents($fldStudentName);
                         if (isset($students)){
                             foreach ($students as $item){
                                 echo "<tr>";
