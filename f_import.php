@@ -6,7 +6,6 @@ extract($_POST);
 //+++++Note++++
 //Import doesn't handle csv comments since that is now moving to the Student layout page
 
-//TODO Limit file type to csv only
 //TODO Catch/handle errors
 //TODO Overwrite new grade for an existing students grade
 
@@ -78,7 +77,7 @@ if(isset($btnSubmit)){
     </div>
     <div class="form-group">
         <div class="offset-sm-4 col-sm-6 pb-4">
-            <input type="file" name="fileUpload"> 
+            <input type="file" name="fileUpload" accept=".csv"> 
         </div>
         <div class="offset-sm-6 col sm-4 pb-2">
             <input type="submit" name="btnSubmit" text="Import"></input>
