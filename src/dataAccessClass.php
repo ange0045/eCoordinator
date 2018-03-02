@@ -221,5 +221,19 @@ public function saveStudent($student_id, $name){
     $this->pdo->commit();
 }
 
+// ++++++++  GET STUDENT FUNCTIONS ++++++++
+public function getStudents (){
+    $students = array();
+    $sql = "SELECT * FROM student WHERE student_first_name LIKE ?";
+    $params = array('%$fldStudentName%');
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute($params);
+    foreach ($stmt as $row)
+    {
+        $student = new Student ($row['student_id'], $row['student_first_name'], $row['student_last_name']);
+        $students[] = $student;
+    }
+    return $students;
+}
 }
 

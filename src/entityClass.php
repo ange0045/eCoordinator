@@ -76,3 +76,29 @@ class Course
         return $this->dependencies;
     }
 }
+
+class Student
+{
+    private $student_id;
+    private $student_first_name;
+    private $student_last_name;
+
+    public function __construct($student_id, $student_first_name, $student_last_name) {
+        $this->student_id = $student_id;
+        $this->student_first_name = $student_first_name;
+        $this->student_last_name = $student_last_name;
+    }
+
+    public function getStudentId() {
+        return $this->student_id;
+    }
+
+    public function getFirstName() {
+        return $this->student_first_name;
+    }
+
+    public function getLastName() {
+        return $this->student_last_name;
+    }
+
+}

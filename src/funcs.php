@@ -172,3 +172,21 @@ function val_newCourse($f_title, $f_name) {
         $_SESSION['ses_'.$f_name] = $field; // Creates a new ses var to store value of field
         return $errVal;
 }
+
+/*--------------------------------------------------------------/
+ *              VALIDATION SEARCH FUNCTION
+ *--------------------------------------------------------------*/
+// Checks if any of your fields are empty and generates error messages
+
+function val_Search($f_title, $f_name) {
+        $field  = $_POST[$f_name];
+        if(empty($field)) { // Main validation to check if empty
+            $errVal = "$f_title cannot be left empty";
+            $_SESSION['errCheck'] = "err";
+        }
+        else {
+            $errVal = ""; // If no errors found clears err variable
+        }
+    $_SESSION['ses_'.$f_name] = $field; // Creates a new ses var to store value of field
+        return $errVal;
+}
