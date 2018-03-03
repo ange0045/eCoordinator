@@ -33,7 +33,7 @@ if(!isset($_SESSION['ses_Name']) && ($_SERVER['PHP_SELF'] != '/eCoordinator/f_lo
        <nav>
          <div class="menu-local-nav-container">
             <ul id="menu-local-nav" class="menu">
-              <li id="menu-item-3393" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3393"><a href="index.php">Home</a></li>
+              <li id="menu-item-3393" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3393"><a href="index.php">Student Search</a></li>
               <li id="menu-item-3479" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3479"><a href="f_import.php">Import CSV</a></li>
               <li id="menu-item-3479" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3479"><a href="v_users.php">Users</a></li>
               <li id="menu-item-3479" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3479"><a href="f_courses.php">Courses</a></li>

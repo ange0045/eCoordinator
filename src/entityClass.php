@@ -53,7 +53,11 @@ class Course
     }
     
     public function __toString(){
-        return $this->course_key;
+        $s = $this->course_key;
+        if(!empty($this->getName())){
+            $s = $s . " - " . $this->getName();
+        }
+        return $s;
     }
     
     public function getKey(){

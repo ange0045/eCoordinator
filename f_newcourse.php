@@ -22,43 +22,48 @@
             $_SESSION['ses_fldPassingGrade'] = "";
             $dao->saveNewCourse($fldCourseName, $fldCourseKey, $fldCourseLevel, $fldPassingGrade, $dependencies); // Adds new course to the database
             $alertVar = "User: <strong>$fldUsername</strong> Course added succesfully, redirecting you to the courses page.";
-            echo "<script type='text/javascript'>setTimeout(function() {document.location.href='/eCoordinator/f_courses.php'}, 5000);</script>"; // Redirects user to login after 5 secs
+            echo "<script type='text/javascript'>setTimeout(function() {document.location.href='/eCoordinator/f_courses.php'}, 2500);</script>"; // Redirects user to login after 5 secs
         }
     }
 ?>
-    <form id="new_course" method="post">
-        <div class="offset-sm-2 col-sm-7">
-        <h3><center>Add New Course</h3></center>
-        <br>
+
+<div class="row">
+    <div class="offset-sm-2 col-sm-7">
+        <form id="new_course" method="post">
+            <h3><center>Add New Course</center></h3>
+            <br>
             <?php
-                func_alertBuilder($alertVar, 'Success');
-                func_fieldBuilder("TEXTFIELD", "Course Name", "fldCourseName", "" , $fldCourseName, "", "text", "col-sm-4", "col-sm-8", "", "", "", $sfldCourseName);
-                func_fieldBuilder("TEXTFIELD", "Course Code", "fldCourseKey", "" , $fldCourseKey, "", "text", "col-sm-4", "col-sm-4", "", "", "", $sfldCourseKey);
-                func_fieldBuilder("TEXTFIELD", "Course Level", "fldCourseLevel", "" , $fldCourseLevel, "", "text", "col-sm-4", "col-sm-4", "", "", "", $sfldCourseLevel);
-                func_fieldBuilder("TEXTFIELD", "Passing Grade", "fldPassingGrade", "" , $fldPassingGrade, "", "text", "col-sm-4", "col-sm-4", "", "", "", $sfldPassingGrade);
+            func_alertBuilder($alertVar, 'Success');
+            func_fieldBuilder("TEXTFIELD", "Course Name", "fldCourseName", "", $fldCourseName, "", "text", "col-sm-4", "col-sm-8", "", "", "", $sfldCourseName);
+            func_fieldBuilder("TEXTFIELD", "Course Code", "fldCourseKey", "", $fldCourseKey, "", "text", "col-sm-4", "col-sm-8", "", "", "", $sfldCourseKey);
+            func_fieldBuilder("TEXTFIELD", "Course Level", "fldCourseLevel", "", $fldCourseLevel, "", "text", "col-sm-4", "col-sm-8", "", "", "", $sfldCourseLevel);
+            func_fieldBuilder("TEXTFIELD", "Passing Grade", "fldPassingGrade", "", $fldPassingGrade, "", "text", "col-sm-4", "col-sm-8", "", "", "", $sfldPassingGrade);
             ?>
-        </div>
-        
-        <div class="offset-sm-2">
-            <label class="form-control-label formLabel">Dependencies?</label>
-            <div class="offset-sm-3">
-              <select name="dependencies[]" size="5" multiple="multiple" tabindex="1" style="width:350px;">
-                  <?php 
-                    foreach($courses as $course){
-                        echo "<option value='{$course->getKey()}'>{$course->getKey()}  -  {$course->getName()}</option>";
-                    }
-                  ?>
-              </select>
+
+            <div class="row vcenter">
+                <label class="form-control-label formLabel col-sm-4">Dependencies?</label>
+                <div class="col-sm-8">
+                    <select name="dependencies[]" size="5" multiple="multiple" tabindex="1" class="form-control">
+                         <?php 
+                            foreach($courses as $course){
+                                echo "<option value='{$course->getKey()}'>$course</option>";
+                            }
+                          ?>
+                    </select>
+                </div>
             </div>
-        </div>
-        
-        <div class="offset-sm-2 col-sm-7">
-            <?php
-                echo '<br>';
-                func_btnBuilder("Submit", "btnSubmit", "btnGrey", "col-sm-2", "offset-sm-5");
-            ?>
-        </div>
-    </form>
+            
+            <div class="row vcenter">
+                <div class="offset-sm-2 col-sm-7">
+                    <?php
+                    echo '<br>';
+                    func_btnBuilder("Submit", "btnSubmit", "btnGrey", "col-sm-2", "offset-sm-5");
+                    ?>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <?php
     include 'mod/footer.php';
 ?>

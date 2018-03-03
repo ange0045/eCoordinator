@@ -1,6 +1,5 @@
 </div>
 </div>
-</body>
 <footer style="min-height: 200px">
 	<div class="inside">
 		<section id="schools"  style="margin-left: 20px">
@@ -18,4 +17,5 @@
 	  </section>
 	</div>
 </footer>
+</body>
 </html>
