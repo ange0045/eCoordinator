@@ -84,25 +84,25 @@ class Course
 class Student
 {
     private $student_id;
-    private $student_first_name;
-    private $student_last_name;
+    private $student_name;
+    private $student_email;
 
-    public function __construct($student_id, $student_first_name, $student_last_name) {
+    public function __construct($student_id, $student_name, $student_email) {
         $this->student_id = $student_id;
-        $this->student_first_name = $student_first_name;
-        $this->student_last_name = $student_last_name;
+        $this->student_name = $student_name;
+        $this->student_last_name = $student_email;
     }
 
     public function getStudentId() {
         return $this->student_id;
     }
 
-    public function getFirstName() {
-        return $this->student_first_name;
+    public function getName() {
+        return $this->student_name;
     }
 
-    public function getLastName() {
-        return $this->student_last_name;
+    public function getEmail() {
+        return $this->student_email;
     }
 
 }
