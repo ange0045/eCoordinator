@@ -95,9 +95,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_username` varchar(75) NOT NULL,
   `user_fullname` varchar(50) NOT NULL,
-  `user_type` varchar(5) NOT NULL,
   `user_password` varchar(100) NOT NULL,
-  `user_approval` varchar(1) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
@@ -105,8 +103,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_username`, `user_fullname`, `user_type`, `user_password`, `user_approval`) VALUES
-(7, 'tester', 'Test User', 'Admin', '2ac9cb7dc02b3c0083eb70898e549b63', 'Y');
+INSERT INTO `users` (`user_id`, `user_username`, `user_fullname`, `user_password`) VALUES
+(7, 'tester', 'Test User', '2ac9cb7dc02b3c0083eb70898e549b63');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

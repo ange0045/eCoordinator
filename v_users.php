@@ -12,18 +12,10 @@ include_once 'mod/deleteModal.php'; // -- Modal for delete confirmation
 extract($_POST);
 $dao = new DataAccessObject(INI_FILE_PATH); // -- Creates a connection to the database
 
-if(isset($btnAppUser) & isset($chk_UsrSel)){
-    if (is_array($chk_UsrSel)) {
-        foreach($chk_UsrSel as $userID) {
-            $dao->approveUser($userID);
-        }
-    }
-}
 ?>
   <div class="row col-sm-offset-1 col-sm-12">
         <div class='col-sm-3 btnsAdmin'>
-            <button id='btnAppUser' value='btnAppUser' name='btnAppUser' class='btn label label-primary btnAction btnApprove'>Approve Selected</button>
-            <button value='Delete' name='btnDelete' data-toggle='modal' data-target='#modalDelete' data-id='Delete' id='btnDelete' class='btn label label-primary btnAction'>Delete Selected</button>
+            <button value='Delete' name='btnDelete' data-toggle='modal' data-target='#modalDelete' data-id='Delete' id='btnDelete' class='btn btn-warning label label-primary btnAction'>Delete Selected</button>
         </div>
 
         <div class='col-sm-9'>
@@ -35,8 +27,6 @@ if(isset($btnAppUser) & isset($chk_UsrSel)){
                         <th class="centerLabel smCell">ID</th>
                         <th class="centerLabel lgCell">Username</th>
                         <th class="centerLabel lgCell">Name</th>
-                        <th class="centerLabel lgCell">Access Type</th>
-                        <th class="centerLabel smCell">Approved</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,10 +43,6 @@ if (isset($users))
             echo "<td align='middle' class='smCell' >".$item->getUserId()."</td>";
             echo "<td align='middle' class='lgCell' >".$item->getUsername()."</td>";
             echo "<td align='middle' class='lgCell' >".$item->getFullName()."</td>";
-            echo "<td align='middle' class='lgCell' >".$item->getAccessType()."</td>";
-            echo "<td align='middle' class='smCell' >";
-            if($item->getApproval() == 'N'){echo 'No';} else {echo 'Yes';}
-            echo "</button></td>";
         echo "</tr>";
     }
 }

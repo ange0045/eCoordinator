@@ -45,12 +45,12 @@ public function getUsernames($username)
 }
 
 // -- Insers new user into the DB
-public function addNewUser($fldUsername, $fldFullName, $fldAccessType, $fldPassword) 
+public function addNewUser($fldUsername, $fldFullName, $fldPassword)
 {
-    $sql = "INSERT INTO USERS VALUES(DEFAULT, :fUsername, :fFullName, :fAccessType, :fPassword, 'N')";
+    $sql = "INSERT INTO USERS VALUES(DEFAULT, :fUsername, :fFullName, :fPassword)";
     $stmt = $this->pdo->prepare($sql);
     $this->pdo->beginTransaction();
-    $stmt->execute(['fUsername'=>$fldUsername, 'fFullName'=>$fldFullName, 'fAccessType'=>$fldAccessType, 'fPassword'=>$fldPassword]);
+    $stmt->execute(['fUsername'=>$fldUsername, 'fFullName'=>$fldFullName, 'fPassword'=>$fldPassword]);
     $this->pdo->commit();
 }
 
@@ -63,20 +63,10 @@ public function getUsers()
     $stmt->execute();
     foreach ($stmt as $row)
     {
-        $user = new User ($row['user_id'], $row['user_username'], $row['user_fullname'], $row['user_type'], $row['user_approval']);
+        $user = new User ($row['user_id'], $row['user_username'], $row['user_fullname']);
         $users[] = $user;
     }
     return $users;
-}
-
-// -- Updates the user record to approved
-public function approveUser($UserId)
-{
-    $sql = "UPDATE USERS SET user_approval = 'Y' WHERE user_id = :fUserId";
-    $stmt = $this->pdo->prepare($sql);
-    $this->pdo->beginTransaction();
-    $stmt->execute(['fUserId'=>$UserId]);
-    $this->pdo->commit();
 }
 
 // -- Deletes a user from the db
@@ -93,18 +83,19 @@ public function deleteUser($UserId)
 public function getUserByUsernameAndPassword($username, $password)
 {
     $user = null;
-    $sql = "SELECT * FROM USERS WHERE user_username = :username AND user_password = :password AND user_approval = 'Y'";
+    $sql = "SELECT * FROM USERS WHERE user_username = :username AND user_password = :password";
 
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute(['username' => $username, 'password'=>$password]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if($row)
     {
-        $user = new User ($row['user_id'], $row['user_username'], $row['user_fullname'], $row['user_type'], $row['user_approval']);
+        $user = new User ($row['user_id'], $row['user_username'], $row['user_fullname']);
     }
     return $user;
 }
 // .USER ENDS
+
 
 // ++++++++ COURSE FUNCTIONS ++++++++
 
@@ -118,7 +109,7 @@ public function getDependencies($courseKey)
     {
         $dependencies[] = $row['depends_on'];
     }
-    
+
     return $dependencies;
 }
 
@@ -165,7 +156,7 @@ public function saveNewCourse($fldCourseName, $fldCourseKey, $fldCourseLevel, $f
     $this->pdo->beginTransaction();
     $stmt->execute(['fCourseKey'=>$fldCourseKey,'fPassingGrade'=>$fldPassingGrade, 'fCourseLevel'=>$fldCourseLevel, 'fCourseName'=>$fldCourseName]);
     $this->pdo->commit();
-    
+
     if(!empty($dependencies)){
         foreach($dependencies as $dependancy){
             $sql = "INSERT INTO dependencies VALUES(:fCourseKey, :fDependancy)";
@@ -183,13 +174,13 @@ public function updateCourse($editCourseKey, $fldCourseName, $fldCourseKey, $fld
     $this->pdo->beginTransaction();
     $stmt->execute(['editCourseKey'=>$editCourseKey, 'fCourseKey'=>$fldCourseKey,'fPassingGrade'=>$fldPassingGrade, 'fCourseLevel'=>$fldCourseLevel, 'fCourseName'=>$fldCourseName]);
     $this->pdo->commit();
-    
+
     $sql = "DELETE FROM dependencies WHERE course_key = :editCourseKey";
     $stmt = $this->pdo->prepare($sql);
     $this->pdo->beginTransaction();
     $stmt->execute(['editCourseKey'=>$editCourseKey]);
     $this->pdo->commit();
-    
+
     if(!empty($dependencies)){
         foreach($dependencies as $dependancy){
             $sql = "INSERT INTO dependencies VALUES(:fCourseKey, :fDependancy)";
@@ -236,4 +227,3 @@ public function getStudents ($fldStudentName){
     return $students;
 }
 }
-

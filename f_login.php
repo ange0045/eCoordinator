@@ -17,17 +17,15 @@ if(isset($btnLogin)){
       $_SESSION['ses_Username'] = $fldUsername;
       $fnVar_User = $dao->getUserByUsernameAndPassword($fldUsername, md5($fldPassword));  // Function also checks if user has been approved
       $_SESSION['ses_User'] = $fnVar_User;
-      $_SESSION['LAST_ACTIVITY'] = $curtime;
     }
 
     if(isset($fnVar_User)){
         if ($_SESSION['ses_User'] != '') {
             $_SESSION['ses_Name'] = $fnVar_User->getFullName();
-            $_SESSION['ses_Access'] = $fnVar_User->getAccessType();
             echo "<script type='text/javascript'>document.location.href='/eCoordinator/index.php';</script>"; // Redirects user to index
         }
     } else {
-        $msgLogin = "Incorrect Username/Password or access not yet approved";
+        $msgLogin = "Incorrect Username/Password";
     }
 }
 
@@ -45,7 +43,6 @@ if(isset($btnLogin)){
               // SYNTAX: fieldBuilder([TYPE], [LABEL], [NAME & ID], [ARGUMENTS], [VALUE], [CSS], [VALUE TYPE], [LBL COLUMNS], [FLD COLUMNS], [LBL COLS OFFSET], [FLD COL OFFSET], [FLD OPTIONS], [ERROR MSG])
               func_fieldBuilder("TEXTFIELD", "Username", "fldUsername", "" , $fldUsername, "", "text", "col-sm-4", "col-sm-5", "", "", "", $fnVar_Username);
               func_fieldBuilder("TEXTFIELD", "Password", "fldPassword", "" , $fldPassword, "", "password", "col-sm-4", "col-sm-5", "", "", "", $fnVar_Password);
-
               func_btnBuilder("Submit", "btnLogin", "btnGrey", "col-sm-2", "offset-sm-5");
             ?>
 

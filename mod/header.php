@@ -45,8 +45,7 @@ if(!isset($_SESSION['ses_Name']) && ($_SERVER['PHP_SELF'] != '/eCoordinator/f_lo
           <?php // Shows user info and logout option if user is logged in
           if (isset($_SESSION['ses_Name'])) {
             echo '<div class="col-sm-3 infoHeader" id="titleScan">';
-                echo '<strong>Hi</strong> ' . $_SESSION['ses_Name'] .'<br>';
-                echo $_SESSION['ses_Access'] .'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
+                echo '<strong>Hi</strong> ' . $_SESSION['ses_Name'] . ' | ';
                 echo '<button id="btnLogout" type="button" data-toggle="modal" data-target="#modalLogout" title="LOG OUT from eCoordinator">LOG OUT <i class="fa fa-sign-out fa-1x" aria-hidden="true"></i></button>';
             echo '</div>';
           }
@@ -58,7 +57,7 @@ if(!isset($_SESSION['ses_Name']) && ($_SERVER['PHP_SELF'] != '/eCoordinator/f_lo
     <body>
         <div id="wrapper">
        <div id="main" role="main">
-           
+
 
 <?php // ************************** MESSAGE CONFIRMATION ************************** ?>
           <div id="message">
