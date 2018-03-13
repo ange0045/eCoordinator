@@ -15,7 +15,6 @@
         $sfldPassingGrade       = val_newCourse('Passing Grade', 'fldPassingGrade');
 
         if(empty($_SESSION['errCheck'])){ // No errors found, adds user to db
-            print_r($dependencies);
             $_SESSION['ses_fldCourseName'] = ""; // Clears form values
             $_SESSION['ses_fldCourseKey'] = "";
             $_SESSION['ses_fldCourseLevel'] = "";
