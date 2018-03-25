@@ -195,11 +195,27 @@ public function updateCourse($editCourseKey, $fldCourseName, $fldCourseKey, $fld
 // ++++++++ STUDENTCOURSE FUNCTIONS ++++++++
 
 public function saveStudentCourse($student_id, $course_key, $grade){
-    $sql = "INSERT INTO studentcourse VALUES(:fStudentID, :fCourseKey, :fGrade, NULL)";
+    
+    $sql = "SELECT * FROM studentcourse WHERE student_id = :studentid AND course_key = :coursekey";
     $stmt = $this->pdo->prepare($sql);
-    $this->pdo->beginTransaction();
-    $stmt->execute(['fStudentID'=>$student_id, 'fCourseKey'=>$course_key, 'fGrade'=>$grade]);
-    $this->pdo->commit();
+    $stmt->execute(["studentid" => $student_id, "coursekey" => $course_key]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if($row)
+    {
+        $sql = "UPDATE studentcourse SET student_grade = :fGrade WHERE student_id = :fStudentID AND course_key = :fCourseKey";
+        $stmt = $this->pdo->prepare($sql);
+        $this->pdo->beginTransaction();
+        $stmt->execute(['fStudentID'=>$student_id, 'fCourseKey'=>$course_key, 'fGrade'=>$grade]);
+        $this->pdo->commit();
+    }
+    else{
+        $sql = "INSERT INTO studentcourse VALUES(:fStudentID, :fCourseKey, :fGrade, NULL)";
+        $stmt = $this->pdo->prepare($sql);
+        $this->pdo->beginTransaction();
+        $stmt->execute(['fStudentID'=>$student_id, 'fCourseKey'=>$course_key, 'fGrade'=>$grade]);
+        $this->pdo->commit();    
+    }
+    
 }
 
 // ++++++++ STUDENT FUNCTIONS ++++++++
