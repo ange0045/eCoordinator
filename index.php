@@ -25,7 +25,7 @@ if(isset($btnSearch)){
         </div>
     </form>
     <table class='table table-striped table-hover'>
-    <?php 
+    <?php
                 if(empty($_SESSION['errCheck'])){ // No errors found, search student in db
                     $_SESSION['ses_fldStudentName'] = ""; // Clears form values
                     if(isset($fldStudentName)){ //Clears table when form is empty
@@ -43,14 +43,14 @@ if(isset($btnSearch)){
                         if (isset($students)){
                             foreach ($students as $item){
                                 echo "<tr>";
-                                echo "<td align='middle' class='lgCell' >".$item->getStudentId()."</td>";
-                                echo "<td align='middle' class='lgCell' >".$item->getName()."</td>";
-                                echo "<td align='middle' class='lgCell' >".$item->getEmail()."</td>";
+                                echo "<td align='middle' class='lgCell' ><a href='flowchart.php?student=".$item->getStudentId()."'>".$item->getStudentId()."</a></td>";
+                                echo "<td align='middle' class='lgCell' ><a href='flowchart.php?student=".$item->getStudentId()."'>".$item->getName()."</a></td>";
+                                echo "<td align='middle' class='lgCell' ><a href='flowchart.php?student=".$item->getStudentId()."'>".$item->getEmail()."</a></td>";
                                 echo "<th class='centerLabel smCell'><button type='button' class='btn btn-success'><a href='f_studentedit.php'>Edit</a></button></th>";
                                 echo "</tr>";
                                 echo "</tbody>";
-                                
-                            }   
+
+                            }
                         }
                     }
                 }

@@ -92,5 +92,35 @@ class Student
     public function getEmail() {
         return $this->student_email;
     }
+}
 
+class StudentCourse
+{
+    private $stuCourse_stuId;
+    private $stuCourse_couKey;
+    private $stuCourse_stuGrade;
+    private $stuCourse_comments;
+
+    public function __construct($stuCourse_stuId, $stuCourse_couKey, $stuCourse_stuGrade, $stuCourse_comments) {
+        $this->stuCourse_stuId = $stuCourse_stuId;
+        $this->stuCourse_couKey = $stuCourse_couKey;
+        $this->stuCourse_stuGrade = $stuCourse_stuGrade;
+        $this->stuCourse_comments = $stuCourse_comments;
+    }
+
+    public function getStudentId() {
+        return $this->stuCourse_stuId;
+    }
+
+    public function getCourseKey() {
+        return $this->stuCourse_couKey;
+    }
+
+    public function getStudentGrade() {
+        return $this->stuCourse_stuGrade;
+    }
+
+    public function getComments() {
+        return $this->stuCourse_comments;
+    }
 }

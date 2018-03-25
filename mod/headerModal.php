@@ -1,6 +1,7 @@
 <?php
 include_once 'src/funcs.php';
 include_once 'src/constants.php';
+include_once 'src/entityClass.php';
 include_once 'src/dataAccessClass.php';
 ?>
 <html>

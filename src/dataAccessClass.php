@@ -213,7 +213,7 @@ public function saveStudent($student_id, $name){
 }
 
 // ++++++++  GET STUDENT FUNCTIONS ++++++++
-public function getStudents ($fldStudentName){
+  public function getStudents ($fldStudentName){
     $sqlStudentName = "%".$fldStudentName ."%";
     $students = array();
     $sql = "SELECT student_id, student_name, student_email FROM student WHERE student_name LIKE :name";
@@ -225,5 +225,57 @@ public function getStudents ($fldStudentName){
         $students[] = $student;
     }
     return $students;
-}
+  }
+
+
+  public function getStudentByID ($id){
+    $student = null;
+    $sql = "SELECT * FROM student WHERE student_id = :id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(["id" => $id]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if($row)
+    {
+        $student = new Student ($row['student_id'], $row['student_name'], $row['student_email']);
+    }
+    return $student;
+  }
+
+
+  public function getStudentCoursesByIDandKey($sId, $cKey){
+    $studentCourses = array();
+    $sql = "SELECT * FROM studentcourse WHERE student_id = :id AND course_key = :key";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['id' => $sId, 'key' => $cKey]);
+    foreach ($stmt as $row)
+    {
+        $studentCourse = new StudentCourse ($row['student_id'], $row['course_key'], $row['student_grade'], $row['comments']);
+        $studentCourses[] = $studentCourse;
+    }
+    return $studentCourses;
+  }
+
+  public function getStudentCourseByIDandKey($sId, $cKey){
+    $studentCourse = null;
+    $sql = "SELECT * FROM studentcourse WHERE student_id = :id AND course_key = :key";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['id' => $sId, 'key' => $cKey]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if($row)
+    {
+        $studentCourse = new StudentCourse ($row['student_id'], $row['course_key'], $row['student_grade'], $row['comments']);
+    }
+    return $studentCourse;
+  }
+
+  public function updateStudentCourse($sc_ID, $sc_key, $sc_grade, $sc_comment)
+  {
+      $sql = "UPDATE studentcourse SET student_grade = :vGrade, comments = :vComment WHERE student_id = :vId AND course_key = :vKey";
+      $stmt = $this->pdo->prepare($sql);
+      $this->pdo->beginTransaction();
+      $stmt->execute(['vGrade'=>$sc_grade, 'vComment'=>$sc_comment, 'vId'=>$sc_ID, 'vKey'=>$sc_key]);
+      $this->pdo->commit();
+  }
+
+
 }
