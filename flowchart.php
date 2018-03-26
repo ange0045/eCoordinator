@@ -4,6 +4,7 @@ session_start();
 extract($_POST);
 $dao = new DataAccessObject(INI_FILE_PATH);
 $var_lvls = [1,2,3,4];
+$d = 0;
 
 if(isset($_GET["student"])) {
   $flw_student  = $_GET["student"];
@@ -14,42 +15,77 @@ if(isset($_GET["student"])) {
   echo "<script type='text/javascript'>document.location.href='/eCoordinator/index.php';</script>";
 }
 
-function childFm($key, $grade, $pass, $css, $comments, $name, $flw_student) {
+function childFm($key, $grade, $pass, $css, $comments, $name, $flw_student, $courseDependencies) {
   if($comments != '') {
     $com_icon = "<i class='fa fa-comment comIcon'></i>";
   } else {
     $com_icon = "";
   }
 
+  $var_Dependencies = implode(" | ",$courseDependencies);
+
   echo "<ul>";
-    echo "<li>";
+    echo "<li class='gridBox' id='$key'>";
       if($grade == ' --- ') {
-        echo "<a class='cellcss $css' href='#'><center>$name</br><strong>$key</strong></br>Grade: $grade (PG: $pass)</br></center>$com_icon</a>";
+        echo "<a class='cellcss $css' href='#'><center>$name</br><strong>$key</strong></br>Grade: $grade (PG: $pass)</br>$var_Dependencies</center>$com_icon</a>";
       } else {
-        echo "<button type='button' data-toggle='modal' data-target='#view-modal' data-id='$flw_student' data-key='$key' id='btnOpenModal' class='btnFlowChart'><a class='cellcss $css' href='#'><center>$name</br><strong>$key</strong></br>Grade: $grade (PG: $pass)</br></center>$com_icon</a></button>";
+        echo "<button type='button' data-toggle='modal' data-target='#view-modal' data-id='$flw_student' data-key='$key' id='btnOpenModal' class='btnFlowChart'><a class='cellcss $css' href='#'><center>$name</br><strong>$key</strong></br>Grade: $grade (PG: $pass)</br>$var_Dependencies</center>$com_icon</a></button>";
       }
     echo "</li>";
   echo "</ul>";
 }
 
+
+function depen_map($deps) {
+  $d = 0;
+  $count = 0;
+  foreach ($deps as $dc) {
+      $count += count($dc);
+  }
+  echo "<input id='totDep' name='totDep' type='text' readonly hidden value='$count'>";
+
+  foreach (array_keys($deps) as $k) {
+      $i = 0;
+      foreach ($deps[$k] as $v) {
+        echo "<input id='a$d-$i' name='a$d-$i' type='text' readonly hidden value='$k'>";
+        echo "<input id='b$d-$i' name='b$d-$i' type='text' readonly hidden value='$v'>";
+        $i++;
+      }
+      $d++;
+    }
+
+}
+
 ?>
+
+<form method="post" id="formFlowChart">
 
 <h3 class='lbl_user'>Student: <?php echo $stuObj->getName()." (".$stuObj->getStudentId().")"; ?><a href='/eCoordinator/index.php'><i class="fa fa-window-close"></i></a></h3>
 
-<div class="tree col-sm-10 offset-sm-1">
-	<ul>
-		<li>
+<div class="tree">
+
+<canvas id="myCanvas"></canvas>
+
+	<ul class='lvl_row'>
         <?php
         foreach($var_lvls as $var_lvl) {
           $stu_courses = array();
           $stu_comments = array();
-          echo "<li class='li_Level'>";
-          echo "<a href='#' class='lbl_level'>Lvl ($var_lvl)</a>";
+          $depMulti = array();
+          echo "<li class='li_Level offset-sm-1'>";
+          echo "<a class='lbl_level lvlLi'>Lvl ($var_lvl)</a>";
           foreach($courses as $couObj) {
             $courseName = $couObj->getName();
             $courseKey = $couObj->getKey();
             $courseLvl = $couObj->getLevel();
             $coursePass = $couObj->getPassGrade();
+            $courseDependencies = $couObj->getDependencies();
+
+            $t = 0;
+            foreach ($courseDependencies as $dep) {
+              $course_deps[$courseKey][$t] = $dep;
+              $t++;
+            }
 
             $stuCourses = $dao->getStudentCoursesByIDandKey($flw_student, $courseKey);
             foreach ($stuCourses as $stuCouObj) {
@@ -70,14 +106,19 @@ function childFm($key, $grade, $pass, $css, $comments, $name, $flw_student) {
                 $var_Comments = "";
                 $cssCell = "cellPending";
               }
-              childFm($courseKey, $var_Grade, $coursePass, $cssCell, $var_Comments, $courseName, $flw_student);
+              $sesDepFor = $_SESSION['totDep'];
+              childFm($courseKey, $var_Grade, $coursePass, $cssCell, $var_Comments, $courseName, $flw_student, $courseDependencies);
             }
           }
             echo "</li>";
         }
-        ?>
-		</li>
-	</ul>
-</div>
+?>
+	 </ul>
+  </div>
+
+  <?php
+    depen_map($course_deps);
+  ?>
+</form>
   </body>
 </html>

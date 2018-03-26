@@ -109,7 +109,6 @@ public function getDependencies($courseKey)
     {
         $dependencies[] = $row['depends_on'];
     }
-
     return $dependencies;
 }
 
@@ -195,7 +194,7 @@ public function updateCourse($editCourseKey, $fldCourseName, $fldCourseKey, $fld
 // ++++++++ STUDENTCOURSE FUNCTIONS ++++++++
 
 public function saveStudentCourse($student_id, $course_key, $grade){
-    
+
     $sql = "SELECT * FROM studentcourse WHERE student_id = :studentid AND course_key = :coursekey";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute(["studentid" => $student_id, "coursekey" => $course_key]);
@@ -213,9 +212,9 @@ public function saveStudentCourse($student_id, $course_key, $grade){
         $stmt = $this->pdo->prepare($sql);
         $this->pdo->beginTransaction();
         $stmt->execute(['fStudentID'=>$student_id, 'fCourseKey'=>$course_key, 'fGrade'=>$grade]);
-        $this->pdo->commit();    
+        $this->pdo->commit();
     }
-    
+
 }
 
 // ++++++++ STUDENT FUNCTIONS ++++++++
