@@ -32,11 +32,12 @@ session_start();
                <div class="modal-dialog">
                     <div class="modal-content">
                          <div class="modal-header">
-                          <i class="fa fa-sticky-note fa-2x"></i>
+                          <i class="fa fa-edit fa-2x"></i>
                               <div class="modal-title">
                                   <button type="button" class="modalClose" data-dismiss="modal" aria-hidden="true">X</button>
                               </div>
                          </div><!-- /.modal-header -->
+                         <div class="style"></div>
                          <div class="modal-body">
                              <div id="modal-loader" style="display: none; text-align: center;">
                                   <img src="src/img/loader.gif">

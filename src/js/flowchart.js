@@ -5,8 +5,8 @@ $(document).on('click', '#btnOpenModal', function(e){
     var couKey = $(this).data('key'); // Gets course key from box
     $('#dynamic-content').html(''); // leave it blank before ajax call
     $('#modal-loader').show();      // load ajax loader
-    $("#view-modal").height(700); // Sets window size
-    $("#view-modal").width(1000);
+    $("#view-modal").height(800); // Sets window size
+    $("#view-modal").width(1500);
     $.ajax({
             url: 'f_studentcoursemodal.php',
             type: 'POST',

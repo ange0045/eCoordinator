@@ -31,11 +31,11 @@ else {
                     <div class="ContentModal">
                       <?php
                         // -- ROW 1
-                          func_fieldBuilder('TEXTFIELD', 'Student ID', 'fld_ID', 'readonly', $sc_stuId, '', 'text', 'col-sm-3', 'col-sm-6', 'offset-sm-1', '', '', '');
+                          func_fieldBuilder('TEXTFIELD', 'Student ID', 'fld_ID', 'readonly', $sc_stuId, '', 'text', 'col-sm-4', 'col-sm-6', 'offset-sm-1', '', '', '');
                         // -- ROW 2
-                          func_fieldBuilder('TEXTFIELD', 'Course Key', 'fld_Key', 'readonly', $sc_couKey, '', 'text', 'col-sm-3', 'col-sm-6', 'offset-sm-1', '', '', '');
+                          func_fieldBuilder('TEXTFIELD', 'Course Key', 'fld_Key', 'readonly', $sc_couKey, '', 'text', 'col-sm-4', 'col-sm-6', 'offset-sm-1', '', '', '');
                         // -- ROW 3
-                          func_fieldBuilder('TEXTFIELD', 'Grade', 'fld_Grade', '', $sc_stuGrade, '', 'text', 'col-sm-3', 'col-sm-3', 'offset-sm-1', '', '', '');
+                          func_fieldBuilder('TEXTFIELD', 'Grade', 'fld_Grade', '', $sc_stuGrade, '', 'text', 'col-sm-4', 'col-sm-6', 'offset-sm-1', '', '', '');
                       ?>
                     </div><!-- /.mainModal -->
 
@@ -49,7 +49,7 @@ else {
                   </div>  <!-- /.Comments -->
 
                     <div class="col-xs-12 modal-footer">
-                      <button id="btnSubmit" value="btnSubmit" name="btnSubmit" class="btn btn-primary">Update Info</button>
+                      <button id="btnSubmit" value="btnSubmit" name="btnSubmit" class="btn btn-success">Update Info</button>
                     </div>
 
                 </fieldset>
