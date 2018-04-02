@@ -42,7 +42,7 @@ class Course
 
     public function __toString(){
         $s = $this->course_key;
-        if(!empty($this->getName())){
+        if($this->getName()){
             $s = $s . " - " . $this->getName();
         }
         return $s;
