@@ -15,13 +15,9 @@ class DataAccessObject
         $dbConnection = parse_ini_file($iniFile);
         extract($dbConnection);
         try {
-           $this->pdo = new PDO($dsn, $username, $passworddhcp);
+          $this->pdo = new PDO($dsn, $username, $password );
         } catch (Exception $ex) {
-            try {
-                $this->pdo = new PDO($dsn, $username, $password );
-                } catch (Exception $ex) {
-                    echo "The eCoordinator database is either down or there are connection issues.";
-                }
+          echo "The eCoordinator database is either down or there are connection issues.";
         }
     }
 
@@ -38,7 +34,7 @@ class DataAccessObject
 // -- Gets the username for the current user
 public function getUsernames($username)
 {
-    $sql = "SELECT * FROM USERS WHERE user_username = '".$username."' ";
+    $sql = "SELECT * FROM users WHERE user_username = '".$username."' ";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchColumn();
@@ -47,7 +43,7 @@ public function getUsernames($username)
 // -- Insers new user into the DB
 public function addNewUser($fldUsername, $fldFullName, $fldPassword)
 {
-    $sql = "INSERT INTO USERS VALUES(DEFAULT, :fUsername, :fFullName, :fPassword)";
+    $sql = "INSERT INTO users VALUES(DEFAULT, :fUsername, :fFullName, :fPassword)";
     $stmt = $this->pdo->prepare($sql);
     $this->pdo->beginTransaction();
     $stmt->execute(['fUsername'=>$fldUsername, 'fFullName'=>$fldFullName, 'fPassword'=>$fldPassword]);
@@ -58,7 +54,7 @@ public function addNewUser($fldUsername, $fldFullName, $fldPassword)
 public function getUsers()
 {
     $users = array();
-    $sql = "SELECT * FROM USERS ORDER BY user_id ASC";
+    $sql = "SELECT * FROM users ORDER BY user_id ASC";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     foreach ($stmt as $row)
@@ -72,7 +68,7 @@ public function getUsers()
 // -- Deletes a user from the db
 public function deleteUser($UserId)
 {
-    $sql = "DELETE FROM USERS WHERE user_id = :fUserId";
+    $sql = "DELETE FROM users WHERE user_id = :fUserId";
     $stmt = $this->pdo->prepare($sql);
     $this->pdo->beginTransaction();
     $stmt->execute(['fUserId'=>$UserId]);
@@ -83,7 +79,7 @@ public function deleteUser($UserId)
 public function getUserByUsernameAndPassword($username, $password)
 {
     $user = null;
-    $sql = "SELECT * FROM USERS WHERE user_username = :username AND user_password = :password";
+    $sql = "SELECT * FROM users WHERE user_username = :username AND user_password = :password";
 
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute(['username' => $username, 'password'=>$password]);
