@@ -190,3 +190,46 @@ function val_Search($f_title, $f_name) {
     $_SESSION['ses_'.$f_name] = $field; // Creates a new ses var to store value of field
         return $errVal;
 }
+
+
+/*--------------------------------------------------------------/
+ *              GRADE FUNCTION
+ *--------------------------------------------------------------*/
+
+function gradeValue($grade) {
+    $lookup = array(
+        "A+" => 12, "A" => 11, "A-" => 10,
+        "B+" => 9, "B" => 8, "B-" => 7,
+        "C+" => 6, "C" => 5, "C-" => 4,
+        "D+" => 3, "D" => 2, "D-" => 1,
+        "F" => 0,
+        );
+    
+        $value = $lookup[$grade];
+        if($value) {
+            return $value ;
+        }
+        else {
+            return -1;
+        }
+}
+
+function gradeCompare($grade1, $grade2) {
+    $value1 = gradeValue($grade1);
+    $value2 = gradeValue($grade2);
+    
+    if ($value1 > $value2) {
+        return 1;
+    }
+    else if ($value1 == $value2) {
+        return 0;
+    }
+    else {
+        return -1;
+    }
+}
+
+// Returns true if $grade is equal to or greater than $passGrade
+function gradePass($grade, $passGrade) {
+   return gradeCompare($grade, $passGrade) >= 0;
+}

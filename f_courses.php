@@ -18,7 +18,6 @@ if ($editingCourse) {
 if (isset($btnSubmit)) {
     unset($_SESSION['errCheck']); // errCheck should be empty if no errors are found
     $alertVar = ""; // alerVar is used to display confirmation message after submitting
-    $sfldCourseName = val_newCourse('Course Name', 'fldCourseName'); // Validate fields values and returns error message
     $sfldCourseKey = val_newCourse('Course Code', 'fldCourseKey');
     $sfldCourseLevel = val_newCourse('Course Level', 'fldCourseLevel');
     $sfldPassingGrade = val_newCourse('Passing Grade', 'fldPassingGrade');
@@ -26,7 +25,6 @@ if (isset($btnSubmit)) {
     $courseKey = $editCourseKey;
 
     if (empty($_SESSION['errCheck'])) { // No errors found, adds user to db
-        print_r($dependencies);
         $dao->updateCourse($editCourseKey, $fldCourseName, $fldCourseKey, $fldCourseLevel, $fldPassingGrade, $dependencies);
         $fldCourseName = ""; // Clears form values
         $fldCourseKey = "";
@@ -34,6 +32,9 @@ if (isset($btnSubmit)) {
         $fldPassingGrade = "";
         $alertVar = "Course <strong>$fldCourseKey</strong> updated succesfully.";
         unset($courseKey);
+    }
+    else {
+        $editingCourse = true;
     }
 }
 ?>
@@ -70,7 +71,7 @@ if (isset($alertVar)) {
             <h3><center>Edit Course</center></h3>
             <br>
             <?php
-            func_fieldBuilder("TEXTFIELD", "Course Name", "fldCourseName", "", $fldCourseName, "", "text", "col-sm-4", "col-sm-8", "", "", "", $sfldCourseName);
+            func_fieldBuilder("TEXTFIELD", "Course Name", "fldCourseName", "", $fldCourseName, "", "text", "col-sm-4", "col-sm-8", "", "", "", "");
             func_fieldBuilder("TEXTFIELD", "Course Code", "fldCourseKey", "readonly", $fldCourseKey, "", "text", "col-sm-4", "col-sm-8", "", "", "", $sfldCourseKey);
             func_fieldBuilder("TEXTFIELD", "Course Level", "fldCourseLevel", "", $fldCourseLevel, "", "text", "col-sm-4", "col-sm-8", "", "", "", $sfldCourseLevel);
             func_fieldBuilder("TEXTFIELD", "Passing Grade", "fldPassingGrade", "", $fldPassingGrade, "", "text", "col-sm-4", "col-sm-8", "", "", "", $sfldPassingGrade);
