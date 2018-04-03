@@ -81,7 +81,7 @@ if(isset($btnSubmit)) {
 ?>
 <form id="form_import" method="post" action="f_import.php" enctype="multipart/form-data">
     <div class="offset-sm-2 col-sm-7">
-       <h1 class="pb-5">Import a Semester CSV</h1>
+        <h3 class="pb-5 center">Import a Semester CSV</h3>
     </div>
     <div class="form-group">
         <div class="offset-sm-2 col-sm-7">
