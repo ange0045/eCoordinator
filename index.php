@@ -43,8 +43,8 @@ if(isset($btnSearch)){
                             foreach ($students as $item){
                                 echo "<tr>";
                                 echo "<td align='middle' class='lgCell' ><a href='flowchart.php?student=".$item->getStudentId()."'>".$item->getStudentId()."</a></td>";
-                                echo "<td align='middle' class='lgCell' ><a href='flowchart.php?student=".$item->getStudentId()."'>".$item->getName()."</a></td>";
-                                echo "<td align='middle' class='lgCell' ><a href='flowchart.php?student=".$item->getStudentId()."'>".$item->getEmail()."</a></td>";
+                                echo "<td align='middle' class='lgCell' >".$item->getName()."</td>";
+                                echo "<td align='middle' class='lgCell' >".$item->getEmail()."</td>";
                                 echo "</tr>";
                                 echo "</tbody>";
 
