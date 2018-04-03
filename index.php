@@ -35,7 +35,6 @@ if(isset($btnSearch)){
                         echo "<th class='centerLabel lgCell'>ID</th>";
                         echo "<th class='centerLabel lgCell'>Name</th>";
                         echo "<th class='centerLabel lgCell'>Email</th>";
-                        echo "<th class='centerLabel smCell'></th>";
                         echo "</tr>";
                         echo "</thead>";
                         echo "<tbody>";
@@ -44,9 +43,8 @@ if(isset($btnSearch)){
                             foreach ($students as $item){
                                 echo "<tr>";
                                 echo "<td align='middle' class='lgCell' ><a href='flowchart.php?student=".$item->getStudentId()."'>".$item->getStudentId()."</a></td>";
-                                echo "<td align='middle' class='lgCell' ><a href='flowchart.php?student=".$item->getStudentId()."'>".$item->getName()."</a></td>";
-                                echo "<td align='middle' class='lgCell' ><a href='flowchart.php?student=".$item->getStudentId()."'>".$item->getEmail()."</a></td>";
-                                echo "<th class='centerLabel smCell'><button type='button' class='btn btn-success'><a href='f_studentedit.php'>Edit</a></button></th>";
+                                echo "<td align='middle' class='lgCell' >".$item->getName()."</td>";
+                                echo "<td align='middle' class='lgCell' >".$item->getEmail()."</td>";
                                 echo "</tr>";
                                 echo "</tbody>";
 
