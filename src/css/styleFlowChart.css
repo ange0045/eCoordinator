@@ -139,7 +139,25 @@
 }
 
 .comIcon {
-	float: right;
+    font-weight: bold !important;
+    position: absolute;
+    bottom: 10px;
+}
+
+.checkIcon{
+    float:right;
+    font-weight: bold !important;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+
+.excepIcon{
+    font-size: 1.2rem !important;
+    font-weight: bold;
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
 }
 
 .tree ul {
@@ -185,7 +203,7 @@ filter: alpha(opacity=90); /* For IE8 and earlier */
 	width: 10rem;
 	padding: 0.5rem;
 	text-decoration: none;
-	color: #404040;
+	color: #303030;
 	font-family: arial, verdana, tahoma;
 	font-size: 15px;
 	display: inline-grid;
@@ -217,5 +235,14 @@ filter: alpha(opacity=90); /* For IE8 and earlier */
 }
 
 .fa-edit{
+    color:white;
+}
+
+
+.info{
+    -webkit-text-stroke: 0px black;
+    float:left;
+    padding-top: 5px;
+    padding-left: 1rem;
     color:white;
 }

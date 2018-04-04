@@ -21,15 +21,24 @@ function childFm($key, $grade, $pass, $css, $comments, $name, $flw_student, $cou
   } else {
     $com_icon = "";
   }
+  
+
+  //if(course is passed)
+  $pass_icon = "<i class='fa fa-check checkIcon'></i>";
+  //else
+  //$pass_icon = "<i class='fa fa-times timesIcon'></i>";
+  
+  $excep_icon = "<i class='fa fa-plus excepIcon'></i>";
+
 
   $var_Dependencies = implode(" | ",$courseDependencies);
 
   echo "<ul>";
     echo "<li class='gridBox' id='$key'>";
       if($grade == ' --- ') {
-        echo "<a class='cellcss $css' href='#'><center>$name</br><strong>$key</strong></br>Grade: $grade (PG: $pass)</br><div class='dep_style'>$var_Dependencies</div></center>$com_icon</a>";
+        echo "<a class='cellcss $css' href='#'><center>$name</br><strong>$key</strong></br>Grade: $grade (PG: $pass)</br><div class='dep_style'>$var_Dependencies</div></center><div>$excep_icon$com_icon</div></a>";
       } else {
-        echo "<button type='button' data-toggle='modal' data-target='#view-modal' data-id='$flw_student' data-key='$key' id='btnOpenModal' class='btnFlowChart'><a class='cellcss $css' href='#'><center>$name</br><strong>$key</strong></br>Grade: $grade (PG: $pass)</br><div class='dep_style'>$var_Dependencies</div></center>$com_icon</a></button>";
+        echo "<button type='button' data-toggle='modal' data-target='#view-modal' data-id='$flw_student' data-key='$key' id='btnOpenModal' class='btnFlowChart'><a class='cellcss $css' href='#'><center>$name</br><strong>$key</strong></br>Grade: $grade (PG: $pass)</br><div class='dep_style'>$var_Dependencies</div></center><div>$com_icon$pass_icon</div></a></button>";
       }
     echo "</li>";
   echo "</ul>";
@@ -61,7 +70,7 @@ function depen_map($deps) {
 <form method="post" id="formFlowChart">
     
 
-    <h3 class='lbl_user'>Student: <?php echo $stuObj->getName()."(".$stuObj->getStudentId().")"; ?><a href='/eCoordinator/index.php'><div class="flo-close"><i class="fa fa-window-close"></i></div></a></h3>
+<h3 class='lbl_user'><a href='#'><div class="info"><i class="fa fa-info-circle"></i></div></a> Student: <?php echo $stuObj->getName()."(".$stuObj->getStudentId().")"; ?><a href='/eCoordinator/index.php'><div class="flo-close"><i class="fa fa-window-close"></i></div></a></h3>
 <div class="style"></div>
 
 <div class="tree">
