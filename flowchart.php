@@ -21,13 +21,13 @@ function childFm($key, $grade, $pass, $css, $comments, $name, $flw_student, $cou
   } else {
     $com_icon = "";
   }
-  
+
 
   //if(course is passed)
   $pass_icon = "<i class='fa fa-check checkIcon'></i>";
   //else
   //$pass_icon = "<i class='fa fa-times timesIcon'></i>";
-  
+
   $excep_icon = "<i class='fa fa-plus excepIcon'></i>";
 
 
@@ -68,9 +68,21 @@ function depen_map($deps) {
 ?>
 
 <form method="post" id="formFlowChart">
-    
 
-<h3 class='lbl_user'><a href='#'><div class="info"><i class="fa fa-info-circle"></i></div></a> Student: <?php echo $stuObj->getName()."(".$stuObj->getStudentId().")"; ?><a href='/eCoordinator/index.php'><div class="flo-close"><i class="fa fa-window-close"></i></div></a></h3>
+
+<h3 class='lbl_user'>
+  <button data-toggle='modal' data-target='#view-modal-info' id='btnOpenFlowchartInfo' class="info">
+    <div class="info">
+      <i class="fa fa-info-circle"></i>
+    </div>
+  </button> Student: <?php echo $stuObj->getName()."(".$stuObj->getStudentId().")"; ?>
+  <a href='/eCoordinator/index.php'>
+    <div class="flo-close">
+      <i class="fa fa-window-close"></i>
+    </div>
+  </a>
+</h3>
+
 <div class="style"></div>
 
 <div class="tree">

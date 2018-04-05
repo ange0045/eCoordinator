@@ -26,6 +26,32 @@ $(document).on('click', '#btnOpenModal', function(e){
     });
 });
 
+
+// -- OPEN STUDENT INFO WINDOW
+$(document).on('click', '#btnOpenFlowchartInfo', function(e){
+    e.preventDefault();
+    $('#dynamic-content-info').html(''); // leave it blank before ajax call
+    $('#modal-loader').show();      // load ajax loader
+    $("#view-modal-info").height(550); // Sets window size
+    $("#view-modal-info").width(650);
+    $.ajax({
+            url: 'f_infoFlowchart.php',
+            type: 'POST',
+            dataType: 'html'
+    })
+    .done(function(data){
+            console.log('Loaded student information window');
+            $('#dynamic-content-info').html('');
+            $('#dynamic-content-info').html(data);       // load response
+            $('#modal-loader').hide();              // hide ajax loader
+    })
+    .fail(function(){
+            console.log('Theres an issue with the student course information modal window');
+            $('#modal-loader').hide();
+    });
+});
+
+
 $(document).ready (function(){
 
   $("#success-alert").hide();

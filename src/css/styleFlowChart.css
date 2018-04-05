@@ -8,6 +8,22 @@
 	margin-top: 2rem;
 }
 
+.contentFlowInfo {
+	width: 500px;
+	height: 390px;
+}
+
+.imgInfo {
+	width: 470;
+	height: 380px;
+}
+
+#btnOpenFlowchartInfo{
+	background: none;
+	border: none;
+}
+
+
 .modalClose {           /* Modal close icon, top right corner */
     font-weight: bold;
     font-size: 1.2rem;

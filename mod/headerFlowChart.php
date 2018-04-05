@@ -47,3 +47,23 @@ session_start();
                    </div>
                 </div>
           </div><!-- /.dynamic modal -->
+
+
+<?php // ************************** DYNAMIC MODAL INFO ************************** ?>
+            <div id="view-modal-info" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                 <div class="modal-dialog">
+                      <div class="modal-content">
+                           <div class="modal-header">
+                                <div class="modal-title">
+                                    <button type="button" class="modalClose" data-dismiss="modal" aria-hidden="true">X</button>
+                                </div>
+                           </div><!-- /.modal-header -->
+                           <div class="modal-body">
+                               <div id="modal-loader" style="display: none; text-align: center;">
+                                    <img src="src/img/loader.gif">
+                               </div>
+                               <div id="dynamic-content-info"></div><!-- Form loads here -->
+                            </div>
+                     </div>
+                  </div>
+            </div><!-- /.dynamic modal -->
