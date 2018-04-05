@@ -8,21 +8,6 @@
 	margin-top: 2rem;
 }
 
-.contentFlowInfo {
-	width: 500px;
-	height: 390px;
-}
-
-.imgInfo {
-	width: 470;
-	height: 380px;
-}
-
-#btnOpenFlowchartInfo{
-	background: none;
-	border: none;
-}
-
 .modalClose {           /* Modal close icon, top right corner */
     font-weight: bold;
     font-size: 1.2rem;
@@ -37,8 +22,7 @@
     color: #8ebc5c;
     text-shadow: 0 0 2px #8ebc5c;
 }
-.modal-content,
-.modal-content-info {
+.modal-content {
     -webkit-border-radius: 10px !important;
     -moz-border-radius: 10px !important;
     border-radius: 10px !important;
@@ -81,8 +65,7 @@
     margin: 0 auto;
 }
 
-.modal-header,
-.modal-header-info {         /* Modal header */
+.modal-header {         /* Modal header */
     height: 4rem;
     background-color: #00703c;
     border-bottom: none !important;

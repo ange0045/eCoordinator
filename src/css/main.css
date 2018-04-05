@@ -71,8 +71,7 @@
     top: 3%;
 }
 
-.modal-content,
-.modal-content-info  {
+.modal-content {
   padding: 0.5rem;
 }
 
@@ -181,3 +180,5 @@
 }
 
 /* .VIEWS */
+
+

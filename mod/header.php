@@ -97,22 +97,6 @@ if(!isset($_SESSION['ses_Name']) && ($_SERVER['PHP_SELF'] != '/eCoordinator/f_lo
                 </div>
           </div><!-- /.dynamic modal -->
 
-          <?php // ************************** DYNAMIC MODAL ************************** ?>
-                    <div id="view-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                         <div class="modal-dialog">
-                              <div class="modal-content">
-                                   <div class="modal-header">
-                                        <button type="button" class="modalClose" data-dismiss="modal" aria-hidden="true">X</button>
-                                   <div class="modal-body">
-                                       <div id="modal-loader" style="display: none; text-align: center;">
-                                            <img src="src/img/loader.gif">
-                                       </div>
-                                       <div id="dynamic-content"></div><!-- Form loads here -->
-                                    </div>
-                             </div>
-                          </div>
-                    </div><!-- /.dynamic modal -->
-
 
 <?php // ************************** LOGOUT CONFIRMATION MODAL ************************** ?>
           <div id="modalLogout" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
