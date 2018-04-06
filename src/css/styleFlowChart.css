@@ -179,6 +179,11 @@
 		pointer-events:visible;
 }
 
+.exBtn {
+	background: none;
+	border: none;
+}
+
 .tree ul {
 	display: inline-block;
 	padding-top: 20px; position: relative;

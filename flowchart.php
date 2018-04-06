@@ -30,7 +30,7 @@ function childFm($key, $grade, $pass, $css, $comments, $name, $flw_student, $cou
     $pass_icon = "<i class='fa fa-times timesIcon'></i>";
   }
 
-  $excep_icon = "<button type='button' data-toggle='modal' data-target='#view-modal' data-id='$flw_student' data-key='$key' id='btnOpenModal'><i class='fa fa-plus excepIcon'></i></button>";
+  $excep_icon = "<button type='button' data-toggle='modal' data-target='#view-modal' data-id='$flw_student' data-key='$key' id='btnOpenModal' class='exBtn'><i class='fa fa-plus excepIcon'></i></button>";
 
 
   $var_Dependencies = implode(" | ",$courseDependencies);
