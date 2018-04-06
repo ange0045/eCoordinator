@@ -18,7 +18,8 @@
 	height: 380px;
 }
 
-#btnOpenFlowchartInfo{
+#btnOpenFlowchartInfo,
+#btnOpenStudent {
 	background: none;
 	border: none;
 }
@@ -147,9 +148,8 @@
 }
 
 .cellPending {
-	/* background-color: #FFFDDC; */
-        border: 3px solid #c8c8c8;
-        background-color: #e8e8e8;
+  border: 3px solid #c8c8c8;
+  background-color: #e8e8e8;
 	pointer-events: none;
  	cursor: default;
 }
@@ -160,7 +160,8 @@
     bottom: 10px;
 }
 
-.checkIcon{
+.checkIcon,
+.timesIcon {
     float:right;
     font-weight: bold !important;
     position: absolute;
@@ -174,6 +175,8 @@
     position: absolute;
     bottom: 10px;
     left: 20px;
+		cursor:auto;
+		pointer-events:visible;
 }
 
 .tree ul {

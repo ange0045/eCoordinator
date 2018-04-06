@@ -73,12 +73,14 @@ class Student
 {
     private $student_id;
     private $student_name;
+    private $student_type;
     private $student_email;
 
-    public function __construct($student_id, $student_name, $student_email) {
+    public function __construct($student_id, $student_name, $student_type, $student_email) {
         $this->student_id = $student_id;
         $this->student_name = $student_name;
-        $this->student_last_name = $student_email;
+        $this->student_type = $student_type;
+        $this->student_email = $student_email;
     }
 
     public function getStudentId() {
@@ -87,6 +89,10 @@ class Student
 
     public function getName() {
         return $this->student_name;
+    }
+
+    public function getType() {
+        return $this->student_type;
     }
 
     public function getEmail() {

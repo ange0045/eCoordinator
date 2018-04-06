@@ -13,20 +13,24 @@ if(isset($id) && isset($coursekey)) {
     $stuCou       = $dao->getStudentCourseByIDandKey($id, $coursekey);
     $sc_stuId     = $id;
     $sc_couKey    = $coursekey;
-    $sc_stuGrade  = $stuCou->getStudentGrade();
-    $sc_comment   = $stuCou->getComments();
+
+    if(isset($stuCou)) {
+      $sc_stuGrade  = $stuCou->getStudentGrade();
+      $sc_comment   = $stuCou->getComments();
+      $saveFunc = "a_saveStudentCourse.php";
+    } else {
+      $sc_stuGrade  = "";
+      $sc_comment   = "";
+      $saveFunc = "a_saveStudentCourseNew.php";
+    }
 }
 else {
     echo "Nothing to see here";
 }
-
-// if(isset($btnSubmit)){
-//   $dao->updateStudentCourse($sc_stuId, $sc_couKey, $fld_Grade, $fld_Comments);
-// }
 ?>
 
         <div class="contentMainModal">
-            <form method="post" id="formStuCou" action="a_saveStudentCourse.php">
+            <form method="post" id="formStuCou" action="<?php echo $saveFunc; ?>">
                 <fieldset>
                     <div class="ContentModal">
                       <?php

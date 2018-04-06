@@ -1,4 +1,32 @@
 // -- OPEN STUDENT EDIT WINDOW
+$(document).on('click', '#btnOpenStudent', function(e){
+    e.preventDefault();
+    var stuId = $(this).data('id');   // Gets student ID from box
+    $('#dynamic-content').html(''); // leave it blank before ajax call
+    $('#modal-loader').show();      // load ajax loader
+    $("#view-modal").height(800); // Sets window size
+    $("#view-modal").width(1500);
+    $.ajax({
+            url: 'f_studentmodal.php',
+            type: 'POST',
+            data: 'id='+stuId,
+            dataType: 'html'
+    })
+    .done(function(data){
+            console.log('Loaded student information window');
+            $('#dynamic-content').html('');
+            $('#dynamic-content').html(data);       // load response
+            $('#modal-loader').hide();              // hide ajax loader
+    })
+    .fail(function(){
+            console.log('Theres an issue with the student course information modal window');
+            $('#dynamic-content').html('<i class="glyphicon glyphicon-info-sign"></i> Oooops! \n Maybe the data for this user and course has not been imported yet');
+            $('#modal-loader').hide();
+    });
+});
+
+
+// -- OPEN STUDENT COURSE EDIT WINDOW
 $(document).on('click', '#btnOpenModal', function(e){
     e.preventDefault();
     var stuId = $(this).data('id');   // Gets student ID from box

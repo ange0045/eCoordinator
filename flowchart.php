@@ -22,13 +22,15 @@ function childFm($key, $grade, $pass, $css, $comments, $name, $flw_student, $cou
     $com_icon = "";
   }
 
+  $checkGrade = gradePass($grade, $pass);
 
-  //if(course is passed)
-  $pass_icon = "<i class='fa fa-check checkIcon'></i>";
-  //else
-  //$pass_icon = "<i class='fa fa-times timesIcon'></i>";
+  if($checkGrade) {
+    $pass_icon = "<i class='fa fa-check checkIcon'></i>";
+  } else {
+    $pass_icon = "<i class='fa fa-times timesIcon'></i>";
+  }
 
-  $excep_icon = "<i class='fa fa-plus excepIcon'></i>";
+  $excep_icon = "<button type='button' data-toggle='modal' data-target='#view-modal' data-id='$flw_student' data-key='$key' id='btnOpenModal'><i class='fa fa-plus excepIcon'></i></button>";
 
 
   $var_Dependencies = implode(" | ",$courseDependencies);
@@ -75,7 +77,19 @@ function depen_map($deps) {
     <div class="info">
       <i class="fa fa-info-circle"></i>
     </div>
-  </button> Student: <?php echo $stuObj->getName()."(".$stuObj->getStudentId().")"; ?>
+  </button>
+
+  Student: <?php
+  echo $stuObj->getName()."(".$stuObj->getStudentId().")";
+
+  echo "<button data-toggle='modal' data-target='#view-modal' data-id='$flw_student' id='btnOpenStudent'>";
+    echo "<div class='info'>";
+      echo "<i class='fa fa-user'></i>";
+    echo "</div>";
+  echo "</button>";
+
+  ?>
+
   <a href='/eCoordinator/index.php'>
     <div class="flo-close">
       <i class="fa fa-window-close"></i>

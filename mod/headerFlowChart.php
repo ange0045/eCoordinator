@@ -4,6 +4,11 @@ include_once 'src/constants.php';
 include_once 'src/dataAccessClass.php';
 include_once 'src/entityClass.php';
 session_start();
+
+// Checks to see if user is logged. If not forces user to go to login page.
+if(!isset($_SESSION['ses_Name']) && ($_SERVER['PHP_SELF'] != '/eCoordinator/f_login.php' && $_SERVER['PHP_SELF'] != '/eCoordinator/f_newuser.php')) {
+    echo "<script type='text/javascript'>document.location.href='/eCoordinator/f_login.php';</script>";
+}
 ?>
 <html>
     <head>
